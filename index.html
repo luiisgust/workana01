@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilização montezza</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Aqui mostra que a caixa está oculta, que vai fazer ela aparecer, e sumir novamente */
+        .ocultar {
+            display: none;
+        }
+
+        /* Faz a caixa ter preferência e fazer todo o resto se tornar inutil */
+        .boxcard {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Centralização da caixa principal */
+        .myCard{
+            background-color: white;
+            padding: 5px;
+            width: 1080px;
+            height: 590px;
+            border-radius: 3px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            text-align: center;
+        }
+        /* Fechar a caixa de personalização */
+        #fecharCard{
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+
+        /* Botão adicionar ao carrinho  */
+        #addCarrinho{
+            width: 150px;
+            height: 50px;
+            color: #fff;
+            background-color: #06023f;
+            border: #06023f;
+            margin-top: 10px;
+        }
+
+        /* Caixa para guardar toda personalização */
+        .boxEstilize{
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+        }
+
+        /* Imagem */
+        .imgEstilize{
+            width: 420px;
+            height: 470px;
+            background-color: #06023f;
+            margin-top: 50px;
+            margin-right: auto;
+            margin-left: 60px;
+        }& img{
+           width: 420px;
+           height: 470px; 
+        }
+        .text-preview {
+            position: absolute;
+            top: 40%; /* Ajuste conforme necessário */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px; /* Ajuste conforme necessário */
+            color: #000; /* Escolha a cor que preferir */
+        }
+
+        /* Personalização */
+        .personEstilize{
+            width: 450px;
+            height: 470px;
+            background-color: #fff;
+            border: 1px solid #c7c7c7;
+            margin-top: 50px;
+            margin-right: 60px;
+        } 
+        & h4{
+            text-align: left;
+            padding: 10px;
+        } 
+        .personText{
+            display: flex;
+            flex-direction: column;
+        }
+        .textInput{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .addText{
+            text-align: left;
+        }
+        #caracteresRestantes{
+            text-align: right;
+        }
+        .text-right{
+            color: #c7c7c7;
+            font-size: 12px;
+        }
+        input#addText{
+            border: 1px solid #c7c7c7;
+            width: 90%;
+            height: 30px;
+            margin: auto;
+        }
+
+        /* Emojis */
+        .emojis {
+            display: flex;
+            padding: 10px;
+            margin-top: 15px;
+            margin-left: 7%;
+            width: 80%;
+            border: 1px solid #c7c7c7;
+        }
+        .emoji-btn {
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0px 5px 0px 0px;
+        }
+
+        /* Fontes */
+        .fontes {
+            display: flex;
+            padding: 10px;
+            margin-top: 15px;
+            margin-left: 7%;
+            width: 80%;
+            border: 1px solid #c7c7c7;
+            flex-direction: column;
+            text-align: left;
+        }
+        .fonts-types{
+            display: flex;
+            flex-direction: row;
+        }
+        .font-btn {
+            padding: 10px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 5px 0px 0px;
+        }
+
+        /* Estilos para as diferentes fontes */
+        .fonte1 { font-family: 'Arial', sans-serif; }
+        .fonte2 { font-family:  Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif }
+        .fonte3 { font-family:  'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+        .fonte4 { font-family: Arial, Helvetica, sans-serif }
+        
+    </style>
+</head>
+
+<body>
+    <!-- Botão para fazer a caixa aparecer -->
+    <button onclick="estilize()">Personalize Aqui</button>
+
+    <!-- Aqui é a caixa oculta -->
+    <div class="ocultar" id="estilize">
+
+    </div>
+    
+    
+
+
+
+    <script>
+
+        // Aqui vai fazer com que a caixa se torne visivel ou invisivel
+        window.onload = async function () {
+            document.getElementById('estilize').classList.add('ocultar');
+        }
+
+
+        // Essa função vai fazer com que a caixa apareça ja com a possibilidade de personalizar a Aliança
+        async function estilize() {
+            let elEstilize = document.getElementById('estilize');
+
+            // Limpa o conteúdo antigo e alterna visibilidade
+            elEstilize.innerHTML = `
+                
+                <div class="boxcard">
+                    <div class="myCard">
+                        <button id="fecharCard" onclick="fecharCard()">&times;</button>
+                        <div class="boxEstilize">
+                            <div class="imgEstilize" style="position: relative;">
+                                <img src="download.png" alt="aliança">
+                                <div class="text-preview" id="textPreview">Personalize Aqui</div>
+                            </div>
+                            <div class="personEstilize">
+                                <h4>Gravação interna</h4>
+                                
+                                <div class="personText">
+                                    <div class="textInput">
+                                        <label for="addText" class="addText">Texto Personalizado</label>
+                                        <div class="text-right"><span id="caracteresRestantes">28</span> caracteres restantes</div>
+                                    </div>
+                                    <input type="text" id="addText" name="addText" placeholder="Personalize Aqui" maxlength="28" oninput="atualizarTexto()">
+                                </div>
+
+                                <div class="emojis">
+                                    <button class="emoji-btn" onclick="inserirEmoji('♥')">♥</button>
+                                    <button class="emoji-btn" onclick="inserirEmoji('•')">•</button>
+                                    <button class="emoji-btn" onclick="inserirEmoji('★')">★</button>
+                                    <button class="emoji-btn" onclick="inserirEmoji('✦')">✦</button>
+                                    <button class="emoji-btn" onclick="inserirEmoji('✿')">✿</button>
+                                </div>
+
+                                <div class="fontes">
+                                    <span>Tipo de letra:</span>
+                                    <div class="fonts-types">
+                                        <button class="font-btn" onclick="mudarFonte('fonte1')">Tipo 1</button>
+                                        <button class="font-btn" onclick="mudarFonte('fonte2')">Tipo 2</button>
+                                        <button class="font-btn" onclick="mudarFonte('fonte3')">Tipo 3</button>
+                                        <button class="font-btn" onclick="mudarFonte('fonte4')">Tipo 4</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="addCarrinho" onclick="addCarrinho()">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+            `;
+
+            elEstilize.classList.remove('ocultar');
+        }
+
+        // Está função faz com que a caixa suma com tudo dentro
+        async function fecharCard() {
+            document.getElementById('estilize').classList.add('ocultar');
+        }
+
+        function atualizarTexto() {
+            let inputTexto = document.getElementById("addText");
+            let textPreview = document.getElementById("textPreview");
+            let caracteresRestantes = document.getElementById("caracteresRestantes");
+
+            // Atualiza o texto do anel
+            textPreview.innerHTML = inputTexto.value;
+
+            // Atualiza o contador de caracteres restantes
+            let maxCaracteres = inputTexto.maxLength;
+            caracteresRestantes.innerHTML = maxCaracteres - inputTexto.value.length;
+        }
+
+        function inserirEmoji(emoji) {
+            let inputTexto = document.getElementById("addText");
+            inputTexto.value += emoji;
+            atualizarTexto();
+        }
+
+        // Muda a fonte do texto de pré-visualização
+        function mudarFonte(fonte) {
+            let textPreview = document.getElementById("textPreview");
+            textPreview.className = fonte;
+        }
+
+    </script>
+</body>
+
+</html>
