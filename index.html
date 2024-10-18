@@ -77,13 +77,31 @@
            width: 420px;
            height: 470px; 
         }
-        .text-preview {
+        /* .text-preview {
             position: absolute;
-            top: 40%; /* Ajuste conforme necessário */
+            top: 40%; 
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 14px; /* Ajuste conforme necessário */
-            color: #000; /* Escolha a cor que preferir */
+            font-size: 14px; 
+            color: #000; 
+        } */
+        .ring-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .ring {
+            width: 100%;
+        }
+
+        .curved-text {
+            position: absolute;
+            top: 18%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
 
         /* Personalização */
@@ -186,7 +204,7 @@
 
     </div>
     
-    
+    <!-- <div class="text-preview" id="textPreview">Personalize Aqui</div> -->
 
 
 
@@ -211,7 +229,13 @@
                         <div class="boxEstilize">
                             <div class="imgEstilize" style="position: relative;">
                                 <img src="download.png" alt="aliança">
-                                <div class="text-preview" id="textPreview">Personalize Aqui</div>
+                                
+                                <svg viewBox="0 0 100 100" class="curved-text">
+                                    <path id="textPath" d="M -10,80 A 30,30 0 1,1 110,80" fill="transparent"></path>
+                                    <text>
+                                        <textPath href="#textPath" startOffset="50%" text-anchor="middle" font-size="3" id="textOnRing">Personalize Aqui</textPath>
+                                    </text>
+                                </svg>
                             </div>
                             <div class="personEstilize">
                                 <h4>Gravação interna</h4>
@@ -258,10 +282,10 @@
 
         function atualizarTexto() {
             let inputTexto = document.getElementById("addText");
-            let textPreview = document.getElementById("textPreview");
+            let textPreview = document.getElementById("textOnRing");
             let caracteresRestantes = document.getElementById("caracteresRestantes");
 
-            // Atualiza o texto do anel
+            // Atualiza o texto curvado no SVG
             textPreview.innerHTML = inputTexto.value;
 
             // Atualiza o contador de caracteres restantes
@@ -269,10 +293,19 @@
             caracteresRestantes.innerHTML = maxCaracteres - inputTexto.value.length;
         }
 
+        // function inserirEmoji(emoji) {
+        //     let inputTexto = document.getElementById("addText");
+        //     inputTexto.value += emoji;
+        //     atualizarTexto();
+        // }
         function inserirEmoji(emoji) {
             let inputTexto = document.getElementById("addText");
-            inputTexto.value += emoji;
-            atualizarTexto();
+
+            // Verifica se o emoji cabe dentro do limite de caracteres
+            if (inputTexto.value.length + emoji.length <= inputTexto.maxLength) {
+                inputTexto.value += emoji;
+                atualizarTexto();
+            }
         }
 
         // Muda a fonte do texto de pré-visualização
